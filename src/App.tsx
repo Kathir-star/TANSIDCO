@@ -3,7 +3,6 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { LockScreen } from './components/LockScreen';
-import { FirstTimeSetup } from './components/FirstTimeSetup';
 import { Dashboard } from './components/Dashboard';
 import { DailyAttendance } from './components/DailyAttendance';
 import { StaffManagement } from './components/StaffManagement';
@@ -33,12 +32,7 @@ const MainAppContent: React.FC = () => {
     );
   }
 
-  // 1. Check if first time setup is needed
-  if (!settings?.isConfigured) {
-    return <FirstTimeSetup onComplete={() => setActiveTab('dashboard')} />;
-  }
-
-  // 2. Check if logged out or screen locked
+  // Check if logged out or screen locked
   if (!user) {
     return <LockScreen mode="login" />;
   }

@@ -94,6 +94,7 @@ const DEFAULT_SETTINGS: SystemSettings = {
   workingDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   weeklyOffDays: ['Sun'],
   autoBackupInterval: 'daily',
+  isConfigured: true,
   isSetupCompleted: true,
   localServerPort: 3000,
   sessionTimeoutMinutes: 60,
@@ -161,6 +162,8 @@ class LocalDatabase {
         if (!parsed.settings) {
           parsed.settings = DEFAULT_SETTINGS;
         }
+        parsed.settings.isConfigured = true;
+        parsed.settings.isSetupCompleted = true;
         if (parsed.settings.officeName === 'Apex Enterprises & Engineering') {
           parsed.settings.officeName = 'TANSIDCO';
         }

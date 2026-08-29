@@ -28,9 +28,21 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const DEFAULT_TANSIDCO_SETTINGS: SystemSettings = {
+  officeName: 'TANSIDCO',
+  financialYear: '2026-2027',
+  workingDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  weeklyOffDays: ['Sun'],
+  autoBackupInterval: 'daily',
+  isConfigured: true,
+  isSetupCompleted: true,
+  localServerPort: 3000,
+  sessionTimeoutMinutes: 60,
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AdminUser | null>(null);
-  const [settings, setSettings] = useState<SystemSettings | null>(null);
+  const [settings, setSettings] = useState<SystemSettings>(DEFAULT_TANSIDCO_SETTINGS);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLocked, setIsLocked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
