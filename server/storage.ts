@@ -36,16 +36,26 @@ interface DatabaseSchema {
   sessions: { token: string; expiresAt: number; username: string }[];
 }
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+const isServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+const DATA_DIR = process.env.DATA_DIR || (isServerless ? path.join('/tmp', 'data') : path.join(process.cwd(), 'data'));
 const BACKUPS_DIR = path.join(DATA_DIR, 'backups');
 const DB_FILE = path.join(DATA_DIR, 'office_attendance.json');
 
-// Ensure directories exist
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-if (!fs.existsSync(BACKUPS_DIR)) {
-  fs.mkdirSync(BACKUPS_DIR, { recursive: true });
+// Ensure directories exist safely
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+  if (!fs.existsSync(BACKUPS_DIR)) {
+    fs.mkdirSync(BACKUPS_DIR, { recursive: true });
+  }
+  // If running in serverless and initial database seed exists in workspace, copy it to /tmp
+  const seedFile = path.join(process.cwd(), 'data', 'office_attendance.json');
+  if (isServerless && !fs.existsSync(DB_FILE) && fs.existsSync(seedFile)) {
+    fs.copyFileSync(seedFile, DB_FILE);
+  }
+} catch (e) {
+  console.warn('Storage path init note:', e);
 }
 
 const DEFAULT_CATEGORIES: LeaveCategory[] = [
