@@ -178,9 +178,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onSelectStaff 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* TANSIDCO Official Master Banner & Single Source of Truth Control */}
-      <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-md flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-linear-to-r from-slate-900 via-blue-950 to-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-md flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="flex items-center gap-4">
-          <TansidcoLogo size="md" showText={false} />
+          <TansidcoLogo size="lg" showText={false} />
           <div>
             <div className="flex items-center gap-2.5">
               <h2 className="text-xl font-bold text-white tracking-tight">

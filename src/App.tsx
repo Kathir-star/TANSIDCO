@@ -13,6 +13,7 @@ import { BackupRestore } from './components/BackupRestore';
 import { SettingsPage } from './components/SettingsPage';
 import { StaffProfileModal } from './components/StaffProfileModal';
 import { QuickSearchModal } from './components/QuickSearchModal';
+import { LoadingScreen } from './components/LoadingScreen';
 import { Staff } from './types';
 
 const MainAppContent: React.FC = () => {
@@ -23,13 +24,7 @@ const MainAppContent: React.FC = () => {
   const [isQuickSearchOpen, setIsQuickSearchOpen] = useState<boolean>(false);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white">
-        <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4" />
-        <div className="text-sm font-semibold tracking-wide">Starting Staff Attendance System...</div>
-        <div className="text-xs text-slate-400 mt-1">Initializing local database ledger</div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   // Check if logged out or screen locked

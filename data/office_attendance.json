@@ -4,7 +4,7 @@
     "username": "admin",
     "passwordHash": "$2b$10$vFaYWgrGuAoKj47977RfKOiebLF2qcPrEFal2QYOC144qYRU2Ns9y",
     "name": "Office Administrator",
-    "lastLogin": "2026-08-29T08:20:21.941Z"
+    "lastLogin": "2026-08-29T09:14:47.884Z"
   },
   "settings": {
     "officeName": "TANSIDCO",
@@ -2273,6 +2273,22 @@
   ],
   "auditLogs": [
     {
+      "id": "audit-1787994887885-e7u0d",
+      "timestamp": "2026-08-29T09:14:47.885Z",
+      "performedBy": "admin",
+      "action": "LOGIN_SUCCESS",
+      "target": "Admin Auth",
+      "details": "Administrator logged in."
+    },
+    {
+      "id": "audit-1787994883570-5ewbr",
+      "timestamp": "2026-08-29T09:14:43.570Z",
+      "performedBy": "admin",
+      "action": "LOGIN_SUCCESS",
+      "target": "Admin Auth",
+      "details": "Administrator logged in."
+    },
+    {
       "id": "audit-1787991621942-rmqm6",
       "timestamp": "2026-08-29T08:20:21.942Z",
       "performedBy": "admin",
@@ -2301,6 +2317,16 @@
     {
       "token": "1787991621941-01b1zjh6zmtjg5dwwer07xs",
       "expiresAt": 1787995221941,
+      "username": "admin"
+    },
+    {
+      "token": "1787994883570-v6huofqz4ocmecqoldr4ws",
+      "expiresAt": 1787998483570,
+      "username": "admin"
+    },
+    {
+      "token": "1787994887884-qw6g7wqrfagspsoea0gd7",
+      "expiresAt": 1787998487884,
       "username": "admin"
     }
   ]

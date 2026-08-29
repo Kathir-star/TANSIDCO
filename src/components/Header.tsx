@@ -7,6 +7,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { TansidcoLogo } from './TansidcoLogo';
 
 interface HeaderProps {
   onOpenMobileMenu: () => void;
@@ -60,6 +61,10 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <Menu className="w-5 h-5" />
         </button>
+
+        <div className="lg:hidden shrink-0">
+          <TansidcoLogo size="xs" showText={false} />
+        </div>
 
         <div
           onClick={onOpenQuickSearch}

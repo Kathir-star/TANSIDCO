@@ -28,6 +28,7 @@ import {
   exportDailyAttendancePDF,
   exportDepartmentSummaryPDF,
 } from '../utils/pdfExport';
+import { TansidcoLogo } from './TansidcoLogo';
 import Papa from 'papaparse';
 
 interface ReportsProps {
@@ -606,9 +607,9 @@ export const Reports: React.FC<ReportsProps> = ({ onSelectStaff }) => {
       </div>
 
       {/* Official Print Header (Visible on print) */}
-      <div className="hidden print:block text-center border-b pb-3 mb-4">
-        <h1 className="text-xl font-bold">{settings?.officeName || 'Staff Attendance System'}</h1>
-        <h2 className="text-sm font-semibold capitalize mt-0.5">
+      <div className="hidden print:flex flex-col items-center justify-center text-center border-b pb-3 mb-4">
+        <TansidcoLogo size="lg" showText={true} />
+        <h2 className="text-sm font-semibold capitalize mt-2">
           {reportType.replace('_', ' ')} — {reportType === 'daily' ? selectedDate : `${monthNames[selectedMonth - 1]} ${selectedYear}`}
         </h2>
         <div className="text-xs text-slate-500 mt-0.5">

@@ -44,22 +44,25 @@ export const LockScreen: React.FC<LockScreenProps> = ({ mode }) => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         {/* Office Seal / Logo */}
         <div className="flex flex-col items-center justify-center">
-          <TansidcoLogo size="xl" showText={false} />
+          <TansidcoLogo size="2xl" showText={false} />
           {mode === 'locked' && (
-            <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded-full text-xs font-bold">
+            <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded-full text-xs font-bold shadow-xs">
               <Lock className="w-3.5 h-3.5 text-amber-700" />
               <span>Session Locked</span>
             </div>
           )}
         </div>
 
-        <h2 className="mt-4 text-center text-2xl font-bold tracking-tight text-slate-900">
-          {settings?.officeName || 'Staff Attendance & Leave System'}
+        <h2 className="mt-3 text-center text-2xl font-black tracking-tight text-slate-900 uppercase">
+          {settings?.officeName || 'TANSIDCO'}
         </h2>
-        <p className="mt-1 text-center text-xs text-slate-500">
+        <p className="text-center text-xs font-medium text-slate-600">
+          Tamil Nadu Small Industries Development Corporation Limited
+        </p>
+        <p className="mt-1 text-center text-[11px] text-slate-500">
           {mode === 'locked'
-            ? 'Application locked for security. Enter password to resume.'
-            : 'Secure Administrator Portal (Offline & Local Wi-Fi Ready)'}
+            ? 'Application locked for security. Enter administrator password to resume.'
+            : 'Staff Attendance & Leave Management Portal'}
         </p>
       </div>
 

@@ -24,6 +24,7 @@ import {
 import { AppSettings, LeaveCategoryConfig } from '../types';
 import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { TansidcoLogo } from './TansidcoLogo';
 
 export const SettingsPage: React.FC = () => {
   const { settings, refreshSettings, showToast } = useAuth();
@@ -273,14 +274,17 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="space-y-6 animate-in fade-in duration-200 max-w-4xl mx-auto pb-12">
       {/* Header */}
-      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
-        <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-          <Settings className="w-5 h-5 text-blue-600" />
-          <span>System Settings & Configuration</span>
-        </h2>
-        <p className="text-xs text-slate-500 mt-0.5">
-          Configure office identity, annual leave quotas, working schedules, and LAN local server sharing.
-        </p>
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <Settings className="w-5 h-5 text-blue-600" />
+            <span>System Settings & Configuration</span>
+          </h2>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Configure office identity, annual leave quotas, working schedules, and LAN local server sharing.
+          </p>
+        </div>
+        <TansidcoLogo size="md" showText={false} className="hidden sm:inline-flex" />
       </div>
 
       {/* 1. Office Info & Schedule */}
