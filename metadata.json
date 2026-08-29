@@ -1,0 +1,6 @@
+{
+  "name": "TANSIDCO - Staff Attendance & Leave Management System",
+  "description": "Official TANSIDCO (Tamil Nadu Small Industries Development Corporation Limited) Staff Attendance & Leave Management System with master staff data import, daily attendance, casual/earn/medical leave quotas, medical document verification, and accurate government-format reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
