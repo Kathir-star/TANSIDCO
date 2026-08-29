@@ -1,5 +1,5 @@
 import express from 'express';
-import { db } from './storage';
+import { db } from './storage.js';
 
 export function createExpressApp() {
   const app = express();

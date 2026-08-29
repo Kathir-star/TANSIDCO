@@ -15,8 +15,8 @@ import {
   DashboardStats,
   StaffLeaveSummary,
   MonthlyAttendanceStaffRow,
-} from '../src/types';
-import { TANSIDCO_OFFICIAL_STAFF } from '../src/data/tansidcoStaffData';
+} from '../src/types.js';
+import { TANSIDCO_OFFICIAL_STAFF } from '../src/data/tansidcoStaffData.js';
 
 interface DatabaseSchema {
   admin: {
@@ -229,6 +229,14 @@ class LocalDatabase {
 
   public persist() {
     this.saveDataDirect(this.data);
+  }
+
+  private requirePersistence() {
+    if (isServerless) {
+      throw new Error(
+        'Vercel Demo Mode: Data mutations are disabled because local filesystem persistence is not available in a serverless environment. Please deploy locally or configure a persistent database.'
+      );
+    }
   }
 
   // --- Audit Logging ---
@@ -664,6 +672,7 @@ class LocalDatabase {
     notes: string | undefined,
     performedBy: string
   ): AttendanceRecord {
+    this.requirePersistence();
     const existingIndex = this.data.attendance.findIndex(
       (a) => a.employeeId === employeeId && a.date === dateStr
     );
@@ -723,6 +732,7 @@ class LocalDatabase {
   }
 
   public addLeaveCategory(cat: Omit<LeaveCategory, 'id'>, performedBy: string): LeaveCategory {
+    this.requirePersistence();
     const newCat: LeaveCategory = {
       id: `cat-${Date.now()}`,
       name: cat.name.trim(),
