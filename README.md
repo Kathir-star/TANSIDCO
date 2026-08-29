@@ -1,100 +1,121 @@
-# TANSIDCO - Staff Attendance & Leave Management System
-### Tamil Nadu Small Industries Development Corporation Limited (Govt. of Tamil Nadu)
+# TANSIDCO
+### Staff Attendance & Leave Management System
+**Tamil Nadu Small Industries Development Corporation Limited (Govt. of Tamil Nadu)**
 
 An official, enterprise-grade attendance and leave management system built specifically for TANSIDCO branch offices, administrative units, and industrial estate field stations across Tamil Nadu.
 
 ---
 
-## 🏛️ Key Features
+## Technology
 
-- **Master Staff Roster Management**:
-  - Preloaded with the official 25-member TANSIDCO staff hierarchy (Branch Manager, Assistant Engineers, Superintendents, Typists, Office Assistants, etc.).
-  - CSV / Excel bulk import with duplicate detection and real-time field validation.
-  - Active / Inactive employee lifecycle status tracking.
-
-- **Daily Attendance Marking**:
-  - One-click bulk status marking (`Present`, `Absent`, `Casual Leave`, `Earned Leave`, `Medical Leave`, `Half Day`, `Holiday`, `Weekly Off`).
-  - Strict date selection and lock prevention.
-  - Offline sync queue for intermittent connectivity with automatic re-syncing.
-
-- **Atomic Leave Management & Balances**:
-  - Automated leave quotas for Casual Leave (CL: 12 days), Earned Leave (EL: 30 days), Medical Leave (ML: 180 days), Maternity Leave (180 days), and Special Casual Leave (15 days).
-  - Synchronized leave deductions upon approval with automated attendance record updates.
-  - Verification tracking for Medical Leave document submissions.
-  - Overlap and duplicate entry prevention.
-
-- **Official Government-Standard PDF Export Suite**:
-  - **Form-I**: Daily Muster Roll / Attendance Sheet.
-  - **Form-II**: Monthly Attendance & Working Days Abstract Register.
-  - **Form-II(B)**: Monthly Absence & Leave Summary Abstract.
-  - **Form-IV**: Staff Individual Cumulative Leave Ledger.
-  - **Form-V**: Government Holiday Calendar Schedule.
-  - **Form-VI**: Comprehensive System Security Audit Log.
-
-- **Local LAN Office Network Deployment**:
-  - Built-in network broadcaster to display the local IP address (e.g., `http://192.168.1.100:3000`) for LAN access across office computers and tablets.
-  - Atomic database transactions with automated daily/weekly backup rotation.
+- **Frontend**: React 19, TypeScript, Vite 6, Tailwind CSS v4, Lucide Icons, Motion
+- **Backend**: Node.js, Express
+- **Package Manager**: npm
+- **Database / Persistence**:
+  - **Local Office Mode**: Atomic JSON/SQLite-compatible filesystem persistence (`data/office_attendance.json`) with automated JSON backups and LAN distribution.
+  - **Vercel Cloud Mode**: Compatible with Vercel Serverless Functions (`/api/*`) with ephemeral/cloud-compatible database adapter.
 
 ---
 
-## 🚀 Quick Start & Local Setup
+## Development
 
-### Prerequisites
-- Node.js 18+ or 20+
-- npm 9+
-
-### 1. Installation
 ```bash
-git clone https://github.com/your-org/tansidco-attendance-system.git
-cd tansidco-attendance-system
+# 1. Install dependencies
 npm install
-```
 
-### 2. Environment Configuration
-Copy the sample environment file:
-```bash
-cp .env.example .env
-```
-Default parameters in `.env`:
-```env
-PORT=3000
-NODE_ENV=production
-ADMIN_DEFAULT_USERNAME=admin
-ADMIN_DEFAULT_PASSWORD=admin
-SESSION_SECRET=tansidco-secure-session-key-change-in-production
-```
-
-### 3. Development Mode
-Run the unified Vite + Express development server:
-```bash
+# 2. Start unified development server
 npm run dev
 ```
-Open your browser at `http://localhost:3000`.
 
-### 4. Production Build & Deployment
-Build the optimized client bundle and bundled Express backend:
+The dev server will start on `http://localhost:3000`.
+
+---
+
+## Production Build
+
 ```bash
+# Full build (Client + Server)
 npm run build
+
+# Or build client only
+npm run build:client
+
+# Or build server only
+npm run build:server
+
+# Start production server
 npm start
 ```
 
----
-
-## 🔒 Security & Data Privacy
-
-- **No Sensitive Office Data Committed**: The database is stored locally in `data/office_attendance.json` and backup archives in `data/backups/`, both of which are excluded by `.gitignore`.
-- **Pre-loaded Initial Schema**: If no database file is detected on startup, the system automatically initializes with clean default schemas and optional demo roster loading.
-- **Audit Logging**: Every create, update, delete, approval, and restore action is recorded in an immutable audit ledger.
+Outputs:
+- Frontend assets: `dist/` (`index.html`, `assets/`, etc.)
+- Server bundle: `server-dist/server.cjs`
 
 ---
 
-## 📱 Mobile & PWA Support
+## Vercel Deployment
 
-The application is fully responsive and touch-optimized:
-- Can be added to Home Screen as a Progressive Web Application (PWA).
-- Prepared for Capacitor / Android packaging for on-site field officers.
+This project is pre-configured for one-click deployment on Vercel:
+
+1. Push the repository to GitHub: `git push origin main`
+2. In Vercel, click **Add New Project** and select your GitHub repository.
+3. Vercel automatically detects the configuration from `vercel.json`:
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build:client`
+   - **Output Directory**: `dist`
+   - **Serverless API**: Handled via `api/index.ts`
+4. If you have a separate backend server URL, configure `VITE_API_URL` under **Project Settings > Environment Variables** in the Vercel Dashboard.
 
 ---
 
-## 📜 License
-Government of Tamil Nadu / TANSIDCO - Proprietary internal office utility.
+## Local Office Deployment (LAN / Windows Server)
+
+For government office deployment inside a local area network (LAN) without internet access:
+
+1. Clone or copy the repository onto the office computer/server.
+2. Run:
+   ```bash
+   npm install
+   npm run build
+   npm start
+   ```
+3. The server will bind to `0.0.0.0:3000`. Other computers and tablets on the office Wi-Fi/LAN can access the app via `http://<OFFICE_PC_IP>:3000`.
+
+---
+
+## Environment Variables
+
+See `.env.example` for all configurable variables:
+
+```env
+# Optional remote backend API URL (defaults to same-origin /api if left blank)
+VITE_API_URL=
+
+# Directory for local database and backups (defaults to ./data)
+DATA_DIR=
+```
+
+---
+
+## Database
+
+- In **Local Office Mode**, all attendance records, staff profiles, leave allocations, and audit logs are stored securely in `data/office_attendance.json` and rotated in `data/backups/`.
+- **Important**: Local database files (`*.db`, `*.sqlite`, `*.json` with real records, and `data/backups/`) should **NOT** be committed to public GitHub repositories.
+
+---
+
+## Security & Data Privacy
+
+To protect employee privacy and government data integrity:
+- **Never upload or commit**:
+  - Employee attendance registers or personal records
+  - Leave application details or medical certificates
+  - Production database backups
+  - Administrative passwords or API secrets
+- All medical leave verification documents and password hashes are strictly managed locally.
+
+---
+
+## CI / CD
+
+GitHub Actions workflow is configured in `.github/workflows/build.yml` to automatically verify linting, type checks (`tsc --noEmit`), and production builds on every push to `main`.

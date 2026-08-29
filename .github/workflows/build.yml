@@ -27,11 +27,14 @@ jobs:
         run: npm run lint
 
       - name: Build Application & Server
-        run: npm run build
+        run: |
+          npm run build
+          npm run build:server
 
       - name: Verify Build Artifacts
         run: |
           test -d dist || { echo "dist directory not found"; exit 1; }
           test -f dist/index.html || { echo "dist/index.html not found"; exit 1; }
-          test -f dist/server.cjs || { echo "dist/server.cjs not found"; exit 1; }
+          test -d server-dist || { echo "server-dist directory not found"; exit 1; }
+          test -f server-dist/server.cjs || { echo "server-dist/server.cjs not found"; exit 1; }
           echo "Production build verified successfully!"

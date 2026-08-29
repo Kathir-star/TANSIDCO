@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer circular gear boundary -->
+  <circle cx="100" cy="100" r="92" fill="url(#blueGrad)" stroke="url(#goldGrad)" stroke-width="5"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#fcd34d" stroke-width="2" stroke-dasharray="6 3"/>
+
+  <!-- Industrial Cogwheel Teeth / Emblems -->
+  <g fill="#fbbf24">
+    <rect x="94" y="10" width="12" height="16" rx="2"/>
+    <rect x="94" y="174" width="12" height="16" rx="2"/>
+    <rect x="10" y="94" width="16" height="12" rx="2"/>
+    <rect x="174" y="94" width="16" height="12" rx="2"/>
+    <rect x="36" y="36" width="14" height="14" rx="2" transform="rotate(45 43 43)"/>
+    <rect x="150" y="36" width="14" height="14" rx="2" transform="rotate(45 157 43)"/>
+    <rect x="36" y="150" width="14" height="14" rx="2" transform="rotate(45 43 157)"/>
+    <rect x="150" y="150" width="14" height="14" rx="2" transform="rotate(45 157 157)"/>
+  </g>
+
+  <!-- Inner industrial factory silhouette and gear -->
+  <path d="M60 135 L60 100 L80 112 L80 92 L100 104 L100 84 L120 96 L120 135 Z" fill="#ffffff" opacity="0.95"/>
+  <circle cx="100" cy="125" r="22" fill="#1e40af" stroke="#fbbf24" stroke-width="4"/>
+  <circle cx="100" cy="125" r="8" fill="#fbbf24"/>
+
+  <!-- TANSIDCO Text Curved / Top Header -->
+  <text x="100" y="62" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="19" letter-spacing="2">TANSIDCO</text>
+  <text x="100" y="75" text-anchor="middle" fill="#fcd34d" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="8" letter-spacing="1">GOVERNMENT OF TAMIL NADU</text>
+</svg>

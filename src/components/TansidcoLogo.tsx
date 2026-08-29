@@ -9,6 +9,7 @@ interface TansidcoLogoProps {
 }
 
 export const TANSIDCO_LOGO_URL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9V9zlzgBdveQJQ6NogBBbuAAKpYCtXb1H0ZzaMjBvEg&s=10';
+export const TANSIDCO_LOGO_FALLBACK = '/tansidco-logo.svg';
 
 export const TansidcoLogo: React.FC<TansidcoLogoProps> = ({
   className = '',
@@ -17,7 +18,18 @@ export const TansidcoLogo: React.FC<TansidcoLogoProps> = ({
   textColor = 'dark',
   orientation = 'horizontal',
 }) => {
+  const [imgSrc, setImgSrc] = useState<string>(TANSIDCO_LOGO_URL);
   const [imageError, setImageError] = useState(false);
+
+  const handleImageError = () => {
+    if (imgSrc === TANSIDCO_LOGO_URL) {
+      // Try local fallback SVG
+      setImgSrc(TANSIDCO_LOGO_FALLBACK);
+    } else {
+      // Both failed, render vector SVG
+      setImageError(true);
+    }
+  };
 
   const sizeMap = {
     sm: { icon: 32, title: 'text-sm', sub: 'text-[9px]' },
@@ -41,11 +53,11 @@ export const TansidcoLogo: React.FC<TansidcoLogoProps> = ({
       >
         {!imageError ? (
           <img
-            src={TANSIDCO_LOGO_URL}
+            src={imgSrc}
             alt="TANSIDCO Official Logo"
             className="w-full h-full object-contain"
             referrerPolicy="no-referrer"
-            onError={() => setImageError(true)}
+            onError={handleImageError}
           />
         ) : (
           <svg
